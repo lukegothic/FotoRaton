@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fotorat&oacute;n en Pamplona</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="canonical" href="http://xn--iruagamejam-3db.com/fotoraton/pamplona/">
+</head>
+<body>
+	<script>
+	  window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '782678315184880',
+		  xfbml      : true,
+		  version    : 'v2.3'
+		});
+	  };
+	  (function(d, s, id){
+		 var js, fjs = d.getElementsByTagName(s)[0];
+		 if (d.getElementById(id)) {return;}
+		 js = d.createElement(s); js.id = id;
+		 js.src = "//connect.facebook.net/en_ES/sdk.js";
+		 fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	   window.twttr = (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0],
+			t = window.twttr || {};
+		  if (d.getElementById(id)) return t;
+		  js = d.createElement(s);
+		  js.id = id;
+		  js.src = "https://platform.twitter.com/widgets.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+
+		  t._e = [];
+		  t.ready = function(f) {
+			t._e.push(f);
+		  };
+
+		  return t;
+		}(document, "script", "twitter-wjs"));
+	</script>
+    <header>
+		<article class="logo">
+			<span class="title">FOTORAT&Oacute;N</span>
+			<span class="subtitle">en Pamplona</span>
+		</article>
+        <article class="gameData">
+            <article class="round">
+                <span class="caption">Foto</span>
+                <span class="data">
+                    <span id="currentRound">1</span><span>/</span><span id="totalRound">5</span>
+                </span>
+            </article>
+            <article class="score">
+                <span class="caption">Puntos</span>
+                <span class="data" id="score">0</span>
+            </article>
+        </article>
+    </header>
+    <section class="intro">
+    	<section class="opacityfilter">
+    		<section id="introContents">
+				<section id="introtext">
+					<img src="img/fotoraton-intro.png" style="float:left;" />
+					<span>&iexcl;Hola amigo o amiga! Recientemente he visitado Pamplona y he sacado unas fotos s&uacute;per chulas.</span>
+					<p>Te propongo un juego, adivina desde d&oacute;nde he sacado las fotos que te voy a ense&ntilde;ar y &iexcl;Te dir&eacute; lo bien que conoces Pamplona!</p>
+				</section>
+				<section style="clear:both;">
+					<input type="button" class="gameButton" value="Jugar Ahora" id="playButton" />
+				</section>
+				<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+    		</section>
+    	</section>
+    </section>
+    <section class="page">
+		<input type="button" class="gameButton" value="Seleccionar lugar" id="guessButton" disabled="disabled" />
+		<input type="button" class="gameButton" value="OCULTAR" id="hideshowMapButton" />
+		<section id="mapa"></section>
+        <section id="photo"></section>
+        <section id="roundSummary">
+            <article id="lastRoundSummary">
+				<p>La foto fue tomada a <span id="lastRoundDistance"></span> metros del lugar seleccionado.</p>
+				<p>&iexcl;Has conseguido <span id="lastRoundScore"></span> puntos!</p>
+				<p>
+                	<input type="button" class="gameButton" value="Ver siguiente foto" id="nextButton" />
+            		<input type="button" class="gameButton" value="Ver resumen" id="summaryButton" />
+				</p>
+            </article>
+            <article id="gameSummary">
+				<div class="meter"><span id="gameScore"></div></span>
+				<p>Conoces Pamplona como un...</p>
+				<p><span id="rank"></span></p>
+            	<p><input type="button" class="gameButton" value="Jugar de nuevo" id="newGameButton" /></p>
+            	<p><div class="fb-share-button" data-href="http://xn--iruagamejam-3db.com/fotoraton/pamplona/" data-layout="button"></div>&nbsp;<span id="twitterButton"></span></p>
+            </article>
+        </section>
+    </section>
+    <section id="cargandomapa" style="display:none;"><p>Cargando mapa de Pamplona...</p></section>
+    <section id="cargandofotos" style="display:none;"><p>Seleccionando fotos...</p></section>
+    <script src="//sitna.tracasa.es/api/"></script>
+    <script src="jquery.blockUI.js"></script>
+    <script src="extensions.js"></script>
+    <script src="utils.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,253 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	font-family:Helvetica,sans-serif;
+	overflow-y:hidden;
+	overflow-x:auto;
+	border:0;
+	margin:0;
+	padding:0;
+}
+.page {
+	width: 100%;
+	height: 100%;
+	display:none;
+}
+header {
+	position:absolute;
+	z-index:1000;
+}
+
+.tc-map {
+	position:absolute !important;
+	bottom:60px;
+	right:0;
+	width:31em;
+	height:31em;
+	border-top:1px solid #3b6e22;
+	border-left:1px solid #3b6e22;
+	border-bottom:1px solid #3b6e22;
+}
+
+#photo {
+	width:100%;
+	height:100%;
+	padding:5px 0;
+}
+#photo img {
+	/*
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);*/
+}
+.gameButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #9acc85;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #9acc85;
+	box-shadow:inset 0px 1px 0px 0px #9acc85;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #74ad5a), color-stop(1, #68a54b));
+	background:-moz-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:-webkit-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:-o-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:-ms-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#74ad5a', endColorstr='#68a54b',GradientType=0);
+	background-color:#74ad5a;
+	border:1px solid #3b6e22;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:1em;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+	text-transform:uppercase;
+	width:20em;
+	height:3em;
+}
+.gameButton:disabled {
+	-moz-box-shadow:inset 0px 1px 0px 0px #cccccc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cccccc;
+	box-shadow:inset 0px 1px 0px 0px #cccccc;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #aaaaaa), color-stop(1, #aaaaaa));
+	background:-moz-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:-webkit-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:-o-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:-ms-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:linear-gradient(to bottom, #aaaaaa 5%, #aaaaaa 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaaaa', endColorstr='#aaaaaa',GradientType=0);
+	background-color:#aaaaaa;
+	border:1px solid #777777;
+}
+.gameButton:disabled:hover {
+	-moz-box-shadow:inset 0px 1px 0px 0px #aaaaaa;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #aaaaaa;
+	box-shadow:inset 0px 1px 0px 0px #cccccc;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #aaaaaa), color-stop(1, #aaaaaa));
+	background:-moz-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:-webkit-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:-o-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:-ms-linear-gradient(top, #aaaaaa 5%, #aaaaaa 100%);
+	background:linear-gradient(to bottom, #aaaaaa 5%, #aaaaaa 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaaaa', endColorstr='#aaaaaa',GradientType=0);
+	background-color:#aaaaaa;
+	border:1px solid #777777;
+}
+.gameButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #68a54b), color-stop(1, #74ad5a));
+	background:-moz-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:-webkit-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:-o-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:-ms-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
+	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#68a54b', endColorstr='#74ad5a',GradientType=0);
+	background-color:#68a54b;
+}
+header {
+	width:100%;
+}
+.gameData {
+	background: rgba(0,0,0,.7);
+	border-bottom-left-radius: 4px;
+	padding: 10px;
+	float: right;
+	display:none;
+}
+.gameData article {
+	display:inline-block;
+	padding:0 10px;
+}
+.caption {
+	margin: 2px 0;
+	font-family: sans-serif;
+	font-weight: 700;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	display:block;
+	text-align:center;
+}
+.data {
+	color: #fff;
+	display: block;
+	text-align: center;
+	font-weight:bold;
+}
+.logo {
+	float:left;
+	text-align:right;
+	color: #fff;
+	padding: 15px 85px 15px 15px;
+  	height: 70px;
+}
+.logo.raton {
+	background: url(../img/fotoraton-logo.png) no-repeat right;
+}
+.title {
+	font-family: Tahoma;
+	font-weight:bold;
+	font-size:2.2em;
+	display:block;
+	text-shadow:-2px -2px 0 #f00, 2px -2px 0 #f00, -2px 2px 0 #f00, 2px 2px 0 #f00;
+}
+.subtitle {
+	font-family: Tahoma;
+	font-size: 1.5em;
+	display:block;
+	text-shadow:-1px -1px 0 #f00, 1px -1px 0 #f00, -1px 1px 0 #f00, 1px 1px 0 #f00;
+	margin-top: -10px;
+	font-style: italic;
+}
+#photo {
+	text-align:center;
+}
+#guessButton {
+	position: absolute;
+	right:0;
+	bottom:5px;
+	width:31em;
+}
+#hideshowMapButton {
+	position: absolute;
+	right:0px;
+	bottom:510px;
+	width:10em;	
+	z-index:1000;
+}
+#hideshowMapButton.corner {
+	bottom:5px;
+}
+.meter { 
+	height: 1.5em;  /* Can be anything */
+	position: relative;
+	background: #555;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 2px;
+	box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+.meter > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: rgb(43,194,83);
+  background-image: linear-gradient(
+    center bottom,
+    rgb(43,194,83) 37%,
+    rgb(84,240,84) 69%
+  );
+  box-shadow: 
+    inset 0 2px 9px  rgba(255,255,255,0.3),
+    inset 0 -2px 6px rgba(0,0,0,0.4);
+  position: relative;
+  color:#fff;
+  font-weight:bold;
+  text-shadow:-1px -1px 0 #000;
+}
+.intro {
+	height:100%;
+	width:100%;
+}
+@media only screen and (max-width:960px) {
+	.intro { background:url(../img/fondo-mobile.jpg); }
+}
+@media only screen and (min-width:961px) {
+	.intro { background:url(../img/fondo.jpg); }
+}
+.opacityfilter {
+	background: rgba(0,0,0,.6);
+	height:100%;
+	width:100%;
+}
+#introContents {
+  text-align:center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color:white;
+  text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #f00;
+  font-family:Tahoma;
+  font-size:2em;	
+  width:100%;
+}
+#introtext {
+  padding:0 15%;	
+  text-align:left;
+}
+#lastRoundDistance, #lastRoundScore, #rank {
+	font-weight:bold;
+}
+#rank {
+	font-size:2em;
+	text-shadow:-1px -1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, 1px 1px 0 #333;
+}
+#gameSummary {
+	background: url(../img/fotoraton-logo.png) no-repeat right;
+}
+#facebook {
+	color:#fff;
+}
