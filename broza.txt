@@ -1,0 +1,131 @@
+            <!--<img src="img/fotoraton-intro.png" title="logo" class="hidden" />-->
+            <!--
+            <div>
+                Enséñame desde dónde tengo que fotografiar los lugares que aparecen en las fotos!
+                He sacado fotos de xxx, te reto a que saques fotos similares
+            </div>
+            -->
+        <!-- Select Game Mode Scene -->
+        <div id="selectGameModeScene" class="hidden scene">
+            <span class="title">FOTORAT&Oacute;N</span>
+            <span class="subtitle">en Pamplona</span>
+            <a id="startRandom" class="modebutton" title=""><i class="fa fa-random"></i><span>Modo Aleatorio</span><span id="maxscore"></span></a>
+            <a id="startPOI" class="modebutton" title=""><i class="fa fa-star-o"></i><span>Sitios de Inter&eacute;s</span><span id="discoveredpois"></span></a>           
+        </div>
+        <!-- POI List Scene -->
+        <div id="POIListScene" style="scene"></div>
+					<!--
+            <div id="guessResult">
+				<p>La foto fue tomada a <span id="roundDistance"></span>m</p>
+				<p>Has conseguido <span id="roundPoints"></span> puntos</p>
+			</div>
+                -->
+		<!-- Score Scene -->
+		<div id="scoreScene" class="hidden scene">
+			<div><span>Eres un...</span></div>
+			<div><span id="rank"></span></div>
+			<div><span id="score"></span><span> puntos</span></div>
+            <div class="fb-like" data-share="true" data-action="like" data-href="http://www.facebook.com/fotoraton" data-colorscheme="dark" data-width="450" data-show-faces="true"></div>
+		</div>
+		
+		<!-- Ranking Scene -->
+        <div id="rankingScene" class="hidden scene"></div>
+        <!-- Action Bar -->
+        <div id="actionBar" class="hidden">
+            <a href="javascript:void(0)" class="action-link hidden" id="actionGuess">ADIVINAR</a>
+            <a href="javascript:void(0)" class="action-link hidden" id="actionNext">VER SIGUIENTE FOTO</a>
+            <!--<a href="javascript:void(0)" class="action-link hidden" id="actionShowRankings">VER CLASIFICACION</a>-->
+            <a href="javascript:void(0)" class="action-link hidden" id="actionReplay">VOLVER A JUGAR</a>
+            <!--<a href="javascript:void(0)" class="action-link hidden" id="actionBackToTitle">IR AL MENU</a>-->
+        </div>
+		<p><div class="fb-like" data-share="true" data-action="like" data-href="http://www.facebook.com/fotoraton" data-colorscheme="dark" data-width="450" data-show-faces="true"></div>&nbsp;<span id="twitterButton"></span><!--&nbsp;<a href="whatsapp://send?text=&iquest;Conoces Pamplona? &iexcl;Demu&eacute;stralo! http://xn--iruagamejam-3db.com/fotoraton/pamplona" data-action="share/whatsapp/share"><img src="img/whatsapp_logo.png" height="20" />Compartir</a>--></p>
+		
+			var loadSelectPOIScene = function () {
+	    Utils.getJSON("data/31201modopoi.json", function (data) {
+	        var div, img, span;
+	        var scene = document.getElementById("POIListScene");
+	        for (var p = 0, poi = data.pois[p]; p < data.pois.length; poi = data.pois[++p]) {
+	            img = document.createElement("img");
+	            img.id = "poi_" + poi.id;
+	            img.src = poi.url;
+	            span = document.createElement("span");
+	            span.innerHTML = poi.nombre;
+	            div = document.createElement("div");
+	            div.appendChild(img);
+	            div.appendChild(span);
+	            div.classList.add("poi");
+	            div.classList.add(poi.acertado ? "poiacertado" : "poinodescubierto");
+	            scene.appendChild(div);
+	        }
+	        loadScene(SCENES.POILIST);
+	    });
+	};
+	
+		var loadSelectGameModeScene = function () {
+        // TODO: POST
+	    Utils.getJSON("data/progress/" + FR.Game.getPlayLocation().ID + ".json", function (data) {
+	        document.getElementById("maxscore").innerHTML = "Max: " + data.randommode.maxscore;
+	        document.getElementById("discoveredpois").innerHTML = data.poimode.discovered + " de " + data.poimode.total;
+	        //loadScene(SCENES.SELECTGAMEMODE);
+	        FR.Game.startPOI();
+	    });
+	};
+	
+	
+	
+	
+	
+			// GAME MODE SELECT
+	    document.getElementById("startRandom").addEventListener("click", FR.Game.startRandom);
+	    document.getElementById("startPOI").addEventListener("click", FR.Game.startPOI);
+		// GAME
+		window.addEventListener('popstate', function (e) {
+		    if (e.state) {
+		        switch (e.state.page) {
+		            case HISTORYSTATE.PHOTO:
+		                flipCanvas();
+		                break;
+		            case HISTORYSTATE.MAP:
+		                flipCanvas();
+		                break;
+		        }
+		    }
+		});
+		document.getElementById("actionGuess").addEventListener("click", FR.Game.guess);
+		document.getElementById("actionNext").addEventListener("click", FR.Game.nextRound);
+		document.getElementById("actionReplay").addEventListener("click", FR.Game.restart);
+	    //document.getElementById("actionBackToTitle").addEventListener("click", loadTitleScene);
+	
+	
+	
+	
+	
+	
+	    // DFD #2
+	var startRandom = function() {
+		gameMode = GAMEMODE.RANDOM;
+		console.info("Comenzando juego en modo aleatorio");
+		console.info("Cargando mapa...");
+		Utils.postJSON("data/wsPartidas-modoAleatorio-nuevaPartida.json", {"UID":1234,"action":"newgame_random"}, function (data) {
+
+		});
+		FR.UI.loadGameScene();
+		FR.Map.init();
+	};
+    // DFD #3
+	var startPOI = function() {
+	    gameMode = GAMEMODE.POIS;
+	    console.info("Comenzando juego en modo sitios de interes");
+	    FR.UI.loadGameScene();
+	    window.addEventListener(FR.Map.EVENTS.READY, function (e) {
+	    	FR.Map.reset();
+	    });
+	    FR.Map.init();
+	};
+	
+	
+	
+		var GAMEMODE = {
+		"RANDOM": startRandom
+		, "POIS": startPOI
+	}
