@@ -1,0 +1,25 @@
+[
+      {
+         "id":91125329,
+         "discovered":false
+      },
+      {
+         "id":73233019,
+         "name":"Plaza del Castillo",
+         "discovered":true,
+		 "latitude":42.816489,
+		 "longitude":-1.642513
+      },
+      {
+         "id":16512490,
+         "discovered":false
+      },
+      {
+         "id":72918481,
+         "discovered":false
+      },
+      {
+         "id":2937112,
+         "discovered":false
+      }
+   ]

@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="js/extensions.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/panoramio.js"></script>
+</head>
+<body>
+    <style>
+        div {
+            display:inline-block;
+        }
+        span {
+            position:absolute;
+            background-color:black;
+            color:white;
+            padding:4px;
+            text-align:center;
+        }
+    </style>
+    <script>
+        // posibles:
+        //  1,  2,  9, 17, 23,  57,  65,  70,  71,  59, 132, 134, 146, 151, 209, 249, 310, 325, 510, 508, 235, 554, 631, 708, 708, 760, 786
+        // 11, 25, 40, 66, 69, 136, 233, 283, 304, 359, 430, 574, 632, 708, 714, 720, 799, 854, 861, 924
+        //  2,  7, 11, 20, 31,  36,  28,  40,  44,  45,  47,  48,  60,  59,  67,  66, 116, 125, 145, 147, 166, 393, 434, 485, 699, 715, 752, 753, 861, 881
+        // 2 puente quenosecuales
+        // 9 merindades
+        // 11 ?????
+        // 40 pza castillo
+        // 47 ?????
+        // 56 elseminario
+        // 65 ayuntamiento
+        // 66 monumento fueros
+        // 71 ?????
+        // 125 ????
+        // 136 eltiodelpincho
+        // 146 palza toros
+        // 209 elsanfermin
+        // 233 indurainn
+        // 249-512-67 parque yamaguchi
+        // 283 planetario
+        // 59 monumento encierro
+        // 417 edificios inteligentes
+        // 420 baluarte
+        // 430 catedral
+        // 574 portal de francia
+        // 714 puente oblatas
+        // 718 albergue de peregrinos de lo viejo
+        // 720 ??
+        // 799 ??
+        // 861 estatua toros
+        // 924 ??        
+        // xxx pza fueros
+        // xxx el sadar
+        // xxx heminway
+        // xxx la taconera
+        var cnt = 1;
+        var from = 0;
+        var to = 99;
+        var citybounds;
+        var getPhotos = function () {
+            Utils.getJSONP("http://www.panoramio.com/map/get_panoramas.php?set={0}&size={1}&from={2}&to={3}&minx={4}&miny={5}&maxx={6}&maxy={7}&mapfilter=true"
+                .format("public", "small", from, to, citybounds._southWest.lng, citybounds._southWest.lat, citybounds._northEast.lng, citybounds._northEast.lat), "processPhotos");
+            from += 100;
+            to += 100;
+        };
+        var processPhotos = function (data) {
+            console.log(data);
+            var img, span, div;
+            for (var p = 0, photo = data.photos[p]; p < data.photos.length; photo = data.photos[++p]) {
+                (function () {
+                    var ph = photo;
+                    div = document.createElement("div");
+                    span = document.createElement("span");
+                    span.innerHTML = cnt;
+                    cnt++;
+                    div.appendChild(span);
+                    img = document.createElement("img");
+                    img.src = photo.photo_file_url;
+                    img.addEventListener("click", function () {
+                        console.log(JSON.stringify(ph));
+                        window.open(ph.photo_file_url.replace("small", "medium"), "_blank");
+                    });
+                    div.appendChild(img);
+                    document.body.appendChild(div);
+                })();
+            }
+            if (data.has_more) {
+                getPhotos();
+            }
+        };
+        var bounds = {
+            "pmp": { "_southWest": { "lat": 42.78875722665365, "lng": -1.695007724869891 }, "_northEast": { "lat": 42.84244154252527, "lng": -1.6044310898003002 } },
+            "bcn": { "_southWest": { "lat": 41.3200039990643, "lng": 2.06993999999999 }, "_northEast": { "lat": 41.4679429990637, "lng": 2.22801000000001 } }
+
+        };
+        var changeCity = function () {
+            var city = window.prompt("city", "pmp");
+            var citybounds = bounds[city];
+            if (citybounds) {
+                getPhotos();
+            };
+        };
+        var city = "pmp";
+        var citybounds = bounds[city];
+        if (citybounds) {
+            getPhotos();
+        };
+    </script>
+</body>
+</html>
